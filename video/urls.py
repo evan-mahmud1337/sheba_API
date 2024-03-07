@@ -9,6 +9,9 @@ urlpatterns = [
     path('crimevideo', CrimeVideosView.as_view(),name='crime_view_item'),
     path('crimevideocomment/<int:video_id>', CommentViewitem.as_view(),name='comment_view'),
 
+    path('solvevideo', SolveVideosView.as_view(),name='solve_view_item'),
+    path('solvevideo/<int:pk>', SolveVideosView.as_view(),name='solve_view'),
+
     path('entertainmentvideo/<int:pk>', EntertainmentVideosView.as_view(),name='crime_view'),
     path('entertainmentvideo', EntertainmentVideosView.as_view(),name='crime_view_item'),
     path('entertainmentvideocomment/<int:video_id>', CommentViewitem.as_view(),name='comment_view'),

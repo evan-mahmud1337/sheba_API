@@ -9,6 +9,17 @@ import platform
 from django.db.models import Q
 
 # Create your views here.
+class SolveVideosView(APIView):
+    def get(self,request,pk=None):
+        if pk:
+            SolveVideo = CrimeVideos.objects.filter(pk=pk, is_solved=True)
+            serializers=CrimeVideosSerializer(SolveVideo,many=True)
+            return Response(serializers.data)
+
+        queryset=CrimeVideos.objects.filter(is_solved=True)
+        serializers=CrimeVideosSerializer(queryset,many=True)
+        return Response(serializers.data)
+
 class CrimeVideosView(APIView):
     def get(self,request,pk=None):
         if pk:
@@ -23,10 +34,11 @@ class CrimeVideosView(APIView):
                 video.save()
 
         if pk is not None:
-            queryset=CrimeVideos.objects.filter(id=pk)
+            queryset=CrimeVideos.objects.filter(id=pk, is_solved=False)
             serializers=CrimeVideosSerializer(queryset,many=True)
             return Response(serializers.data)
-        queryset=CrimeVideos.objects.all()
+        
+        queryset=CrimeVideos.objects.filter(is_solved=False)
         serializers=CrimeVideosSerializer(queryset,many=True)
         return Response(serializers.data)
     
