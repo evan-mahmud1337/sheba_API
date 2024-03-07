@@ -29,6 +29,7 @@ class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, blank=True, null= True)
     first_name = models.CharField(max_length=50, blank=True, null= True)
     last_name = models.CharField(max_length=50, blank=True, null= True)
+    social_media_link = models.CharField(max_length=400, blank=True, null= True)
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 
     def __str__(self):
